@@ -14,6 +14,6 @@ describe('Dictionary Class', function () {
     });
 
 
-    // We need to test for a dictionary property exist
+    // We need to test for a dictionary class exist
     // Then check the keys length to make sure its from A to Z.
 });
