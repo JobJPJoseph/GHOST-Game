@@ -1,4 +1,6 @@
+const { resolve } = require('path');
 const { Board } = require('../class/board');
+const readline = require('readline');
 
 function Player () {
     this.record = "";
@@ -6,8 +8,35 @@ function Player () {
 
 Player.prototype = Object.create(Board.prototype);
 
-Player.prototype.getInput = function (dictionary) {
+Player.prototype.getInput = async function () {
     // This will be Asynchronous
+
+    const rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout
+    });
+
+    return await new Promise((resolve) => {
+
+        const askForInput = () => {
+
+            rl.question('Enter your letter: ', (input) => {
+
+                const validInput = this.isSingleLetter(input);
+
+                if (validInput) {
+                    resolve(validInput);
+                } else {
+                    this.getInput();
+                }
+
+            });
+
+        };
+
+        askForInput();
+
+    });
 
 }
 
@@ -24,7 +53,7 @@ Player.prototype.isSingleLetter = function (letter) {
         'u','v','w','x','y','z'
     ];
 
-    return (!alpha.includes(letter.toLowerCase())) ? false : true;
+    return (!alpha.includes(letter.toLowerCase())) ? false : letter;
 }
 
 module.exports = {

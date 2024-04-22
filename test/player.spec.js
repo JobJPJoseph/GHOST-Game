@@ -56,9 +56,23 @@ describe('Player class', function () {
             const actual = player.isSingleLetter(input);
             const actual2 = player.isSingleLetter(input2);
 
-            expect(actual).to.equal(true);
-            expect(actual2).to.equal(true);
+            expect(actual).to.equal(input);
+            expect(actual2).to.equal(input2);
         });
 
     });
+
+    describe('Player.getInput', function () {
+
+        context('Asynchronous', function () {
+
+            it(`should return the player's input`, async function () {
+                const actual = await player.getInput();
+                return expect(actual).to.be.a('string');
+            });
+
+        });
+
+    });
+
 });
