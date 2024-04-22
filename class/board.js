@@ -1,4 +1,4 @@
-const { Dictionary } = require("../class/dictionary");
+// const { Dictionary } = require("../class/dictionary");
 
 class Board {
 
