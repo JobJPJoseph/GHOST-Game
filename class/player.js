@@ -1,8 +1,8 @@
-const { resolve } = require('path');
 const { Board } = require('../class/board');
 const readline = require('readline');
 
 function Player () {
+    this.name = "Player";
     this.record = "";
 }
 
@@ -25,6 +25,7 @@ Player.prototype.getInput = async function () {
                 const validInput = this.isSingleLetter(input);
 
                 if (validInput) {
+                    rl.close();
                     resolve(validInput);
                 } else {
                     this.getInput();

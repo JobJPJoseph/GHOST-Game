@@ -21,3 +21,9 @@
     3: We need to implement a way to validate a player's input and return true or false.
 
     4: We need to get the player's input and return it.
+
+    5: We need to now focus on the Computer Player class. The class needs to be coded on ES5 syntax. This class will have two properties: name and record. Also Player class should also have this.
+
+    6: We need to assign the ComputerPlayer.prototype to the Board.prototype.
+
+    7: We now need to get the input of the Computer Player.

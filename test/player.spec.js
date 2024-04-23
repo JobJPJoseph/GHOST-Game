@@ -29,6 +29,15 @@ describe('Player class', function () {
         player = new Player();
     });
 
+    describe('Player.contructor', function () {
+
+        it('should declare a property called name and record', function () {
+            expect(player.name).to.equal('Player');
+            expect(player.record).to.equal('');
+        });
+
+    });
+
     describe('Player.isSingleLetter', function () {
 
         it(`should return false when the player's input is not valid`, function () {
