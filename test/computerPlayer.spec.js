@@ -28,11 +28,11 @@ describe('ComputerPlayer Class', function () {
         computerPlayer = new ComputerPlayer();
     });
 
-    describe('Player.contructor', function () {
+    describe('ComputerPlayer.contructor', function () {
 
         it('should declare a property called name and record', function () {
-            expect(player.name).to.equal('ComputerPlayer');
-            expect(player.record).to.equal('');
+            expect(computerPlayer.name).to.equal('Computer');
+            expect(computerPlayer.record).to.equal('');
         });
 
     });
