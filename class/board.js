@@ -1,9 +1,16 @@
-// const { Dictionary } = require("../class/dictionary");
+const { Dictionary } = require("../class/dictionary");
 
 class Board {
 
-    constructor() {
+    constructor(player1, player2) {
+        this.players = [player1, player2];
+        this.fragment = "";
+        this.dictionary;
 
+        if(!Dictionary.isInitialized) {
+            Dictionary.initialize();
+            this.dictionary = Dictionary.dictionary;
+        }
     }
 
 }

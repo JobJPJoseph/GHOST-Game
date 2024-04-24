@@ -10,6 +10,8 @@ class Dictionary {
         return path.join(__dirname, '../Dictionary/dictionary.txt');
     }
 
+    static isInitialized = false;
+
     static initialize() {
 
         const file = this.dictionaryImport();
@@ -27,6 +29,7 @@ class Dictionary {
             this.dictionary[word[0]].push(word);
         }
 
+        this.isInitialized = true;
     }
 
 }
