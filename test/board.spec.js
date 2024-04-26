@@ -63,35 +63,67 @@ describe('Board Class', function () {
             board.isWord('a');
 
             expect(isWordSpy).to.have.been.called.with('a');
+            chai.spy.restore(Board, 'isWord');
         });
 
-        context('When it continues to create a word' , function () {
-            // Make sure to create a variable to hold the original dictionary value to reasign it back later
-            let saveWords = board.dictionary;
-            board.dictionary = [
-                { a: 'ancestor',
-                a: 'apples',
-                a: 'application',
-                a: 'applicable',
-                a: 'axe'}
-            ];
+        context('When it continues to create a piece of a word' , function () {
 
-            expect(board.isWord('a')).to.be.true;
-            board.dictionary = saveWords;
+            it('should return true when it forms a piece of a word', function () {
+                let saveWords = board.dictionary;
+
+                board.dictionary = [
+                    { a: 'ancestor',
+                    a: 'apples',
+                    a: 'application',
+                    a: 'applicable',
+                    a: 'axe'}
+                ];
+
+                expect(board.isWord('a')).to.be.true;
+                board.dictionary = saveWords;
+            });
+
         });
 
         context('When it nolonger creates a word', function () {
-            let saveWords = board.dictionary;
-            board.dictionary = [
-                { a: 'ancestor',
-                a: 'apples',
-                a: 'application',
-                a: 'applicable',
-                a: 'axe'}
-            ];
 
-            expect(board.isWord('b')).to.be.false;
-            board.dictionary = saveWords;
+            it('should return false when it does not form a piece of a word', function () {
+                let saveWords = board.dictionary;
+
+                board.dictionary = [
+                    { a: 'ancestor',
+                    a: 'apples',
+                    a: 'application',
+                    a: 'applicable',
+                    a: 'axe'}
+                ];
+
+                expect(board.isWord('b')).to.be.false;
+                board.dictionary = saveWords;
+            });
+
+        });
+
+        context('When it forms the word itself', function () {
+            // A boolean must not be return but instead the word that was formed since it still true
+
+            it('should return the word if letter now forms w word', function () {
+                let saveWords = board.dictionary;
+
+                board.fragment = 'ancesto'
+                board.dictionary = [
+                    { a: 'ancestor',
+                    a: 'apples',
+                    a: 'application',
+                    a: 'applicable',
+                    a: 'axe'}
+                ];
+
+                expect(board.isWord('r')).to.equal('ancestor');
+                board.fragment = "";
+                board.dictionary = saveWords;
+            });
+
         });
 
     });
