@@ -55,5 +55,46 @@ describe('Board Class', function () {
 
     });
 
+    describe('Board.isWord', function () {
+
+        it(`should accept a single argument that represent the player's input`, function () {
+            const isWordSpy = chai.spy.on(Board, 'isWord');
+
+            board.isWord('a');
+
+            expect(isWordSpy).to.have.been.called.with('a');
+        });
+
+        context('When it continues to create a word' , function () {
+            // Make sure to create a variable to hold the original dictionary value to reasign it back later
+            let saveWords = board.dictionary;
+            board.dictionary = [
+                { a: 'ancestor',
+                a: 'apples',
+                a: 'application',
+                a: 'applicable',
+                a: 'axe'}
+            ];
+
+            expect(board.isWord('a')).to.be.true;
+            board.dictionary = saveWords;
+        });
+
+        context('When it nolonger creates a word', function () {
+            let saveWords = board.dictionary;
+            board.dictionary = [
+                { a: 'ancestor',
+                a: 'apples',
+                a: 'application',
+                a: 'applicable',
+                a: 'axe'}
+            ];
+
+            expect(board.isWord('b')).to.be.false;
+            board.dictionary = saveWords;
+        });
+
+    });
+
 
 });
