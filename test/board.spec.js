@@ -136,5 +136,14 @@ describe('Board Class', function () {
 
     });
 
+    describe('currentPlayer', function () {
+
+        it('should return the first index of Board.players', function () {
+            expect(board.currentPlayer()).to.deep.equal(board.players[0]);
+        });
+
+    });
+
+
 
 });

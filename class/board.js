@@ -14,14 +14,6 @@ class Board {
     }
 
     isWord(letter) {
-        // My thoughts:
-            /*
-            This can be easily done. We could iterate through each element of the array of that particauler key. We could
-            test if the fragment + letter creates the word itself. If true, return the word. If it creates a piece of the word
-            then return true, else return false. This will be explicit, no need to iterate through the whole data set each time.
-
-            Note: This does not follow SRP (Single Responsibility Principle) but this right saves us time
-            */
 
         if (!letter) return false;
 
@@ -36,6 +28,18 @@ class Board {
         }
 
         return false;
+    }
+
+    currentPlayer() {
+        return this.players[0];
+    }
+
+    rotateTurn() {
+        [this.players[0], this.players[1]] = [this.players[1], this.players[0]];
+    }
+
+    reset() {
+        this.fragment = "";
     }
 
 }
