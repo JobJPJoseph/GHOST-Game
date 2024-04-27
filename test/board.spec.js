@@ -58,7 +58,7 @@ describe('Board Class', function () {
     describe('Board.isWord', function () {
 
         it(`should accept a single argument that represent the player's input`, function () {
-            const isWordSpy = chai.spy.on(Board, 'isWord');
+            const isWordSpy = chai.spy.on(Board.prototype, 'isWord');
 
             board.isWord('a');
 
@@ -71,13 +71,15 @@ describe('Board Class', function () {
             it('should return true when it forms a piece of a word', function () {
                 let saveWords = board.dictionary;
 
-                board.dictionary = [
-                    { a: 'ancestor',
-                    a: 'apples',
-                    a: 'application',
-                    a: 'applicable',
-                    a: 'axe'}
-                ];
+                board.dictionary = {
+                    a: [
+                        'ancestor',
+                        'apples',
+                        'application',
+                        'applicable',
+                        'axe'
+                    ]
+                };
 
                 expect(board.isWord('a')).to.be.true;
                 board.dictionary = saveWords;
@@ -90,16 +92,20 @@ describe('Board Class', function () {
             it('should return false when it does not form a piece of a word', function () {
                 let saveWords = board.dictionary;
 
-                board.dictionary = [
-                    { a: 'ancestor',
-                    a: 'apples',
-                    a: 'application',
-                    a: 'applicable',
-                    a: 'axe'}
-                ];
+                board.fragment = "ancesto";
+                board.dictionary = {
+                    a: [
+                        'ancestor',
+                        'apples',
+                        'application',
+                        'applicable',
+                        'axe'
+                    ]
+                };
 
                 expect(board.isWord('b')).to.be.false;
                 board.dictionary = saveWords;
+                board.fragment = "";
             });
 
         });
@@ -110,14 +116,16 @@ describe('Board Class', function () {
             it('should return the word if letter now forms w word', function () {
                 let saveWords = board.dictionary;
 
-                board.fragment = 'ancesto'
-                board.dictionary = [
-                    { a: 'ancestor',
-                    a: 'apples',
-                    a: 'application',
-                    a: 'applicable',
-                    a: 'axe'}
-                ];
+                board.fragment = 'ancesto';
+                board.dictionary = {
+                    a: [
+                        'ancestor',
+                        'apples',
+                        'application',
+                        'applicable',
+                        'axe'
+                    ]
+                };
 
                 expect(board.isWord('r')).to.equal('ancestor');
                 board.fragment = "";
