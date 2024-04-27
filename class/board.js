@@ -42,6 +42,13 @@ class Board {
         this.fragment = "";
     }
 
+    printFragment() {
+        const dash = "-".repeat(42);
+        console.log(dash);
+        console.log(this.fragment);
+        console.log(dash);
+    }
+
 }
 
 module.exports = {

@@ -172,4 +172,26 @@ describe('Board Class', function () {
 
     });
 
+    describe('Board.printFragment', function () {
+
+        it('should print out fragment in a particular way', function () {
+            const consoleSpy = chai.spy.on(console, 'log');
+
+            board.fragment = 'ancesto';
+            const expected = [
+                "-".repeat(42),
+                board.fragment,
+                "-".repeat(42)
+            ];
+
+            board.printFragment();
+
+            expect(consoleSpy).to.have.been.called.with(...expected);
+            chai.spy.restore(console, 'log');
+
+            board.fragment = "";
+        });
+
+    });
+
 });
