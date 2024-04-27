@@ -136,7 +136,7 @@ describe('Board Class', function () {
 
     });
 
-    describe('currentPlayer', function () {
+    describe('Board.currentPlayer', function () {
 
         it('should return the first index of Board.players', function () {
             expect(board.currentPlayer()).to.deep.equal(board.players[0]);
@@ -144,6 +144,32 @@ describe('Board Class', function () {
 
     });
 
+    describe('Board.rotateTurn', function () {
 
+        it('should rotate Board.players', function () {
+            const playerOne = board.players[0];
+            const playerTwo = board.players[1];
+
+            expect(board.currentPlayer()).to.deep.equal(playerOne);
+
+            board.rotateTurn();
+
+            expect(board.currentPlayer()).to.deep.equal(playerTwo);
+
+            board.rotateTurn();
+        });
+
+    });
+
+    describe('Board.reset', function () {
+
+        it('should set Board.fragment to an empty string', function () {
+            board.fragment = "ancest";
+            board.reset();
+
+            expect(board.fragment).to.equal("");
+        });
+
+    });
 
 });
