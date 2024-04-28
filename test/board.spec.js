@@ -194,4 +194,30 @@ describe('Board Class', function () {
 
     });
 
+    describe('Board.losingPlay', function () {
+
+        context('Forms GHOST', function () {
+
+            it(`should return true when the player's record === GHOST`, function () {
+                player.record = "GHOS";
+                player.losingPlay();
+                expect(player.record).to.equal('GHOST');
+                expect(player.losingPlay()).to.be.true;
+                player.record = "";
+            });
+
+        });
+
+        context('Does not form GHOST', function () {
+
+            it(`should progressively add a letter from the word GHOST to record`, function () {
+                expect(player.losingPlay()).to.be.false;
+                expect(player.record).to.equal('G');
+                player.record = "";
+            });
+
+        });
+
+    });
+
 });

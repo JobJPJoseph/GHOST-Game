@@ -49,6 +49,18 @@ class Board {
         console.log(dash);
     }
 
+    losingPlay() {
+        const ghost = 'GHOST';
+        this.record = ghost.slice(0, this.record.length + 1);
+
+        if (this.record === ghost) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
 }
 
 module.exports = {
