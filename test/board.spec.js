@@ -63,7 +63,7 @@ describe('Board Class', function () {
             board.isWord('a');
 
             expect(isWordSpy).to.have.been.called.with('a');
-            chai.spy.restore(Board, 'isWord');
+            chai.spy.restore(Board.prototype, 'isWord');
         });
 
         context('When it continues to create a piece of a word' , function () {
@@ -194,15 +194,15 @@ describe('Board Class', function () {
 
     });
 
-    describe('Board.losingPlay', function () {
+    describe('Board.isGhost', function () {
 
         context('Forms GHOST', function () {
 
             it(`should return true when the player's record === GHOST`, function () {
                 player.record = "GHOS";
-                player.losingPlay();
+                player.isGhost();
                 expect(player.record).to.equal('GHOST');
-                expect(player.losingPlay()).to.be.true;
+                expect(player.isGhost()).to.be.true;
                 player.record = "";
             });
 
@@ -211,7 +211,7 @@ describe('Board Class', function () {
         context('Does not form GHOST', function () {
 
             it(`should progressively add a letter from the word GHOST to record`, function () {
-                expect(player.losingPlay()).to.be.false;
+                expect(player.isGhost()).to.be.false;
                 expect(player.record).to.equal('G');
                 player.record = "";
             });
@@ -219,5 +219,38 @@ describe('Board Class', function () {
         });
 
     });
+
+    describe('winningPlay / losingPlay', function () { // This is time consuming!!!
+
+        it('should call Board.isWord', function () {
+            const isWordSpy = chai.spy.on(Board.prototype, 'isWord');
+
+            board.fragment = 'ance';
+            board.winningPlay();
+            board.fragment = "";
+
+            expect(isWordSpy).to.have.been.called;
+            chai.spy.restore(Board.prototype, 'isWord');
+        });
+
+        it('should return a array that contains letters that result in true of making up a word', function () {
+            board.fragment = 'ancestor';
+            const actual = board.winningPlay();
+            board.fragment = "";
+
+            expect(actual).to.be.an('array');
+        });
+
+        it('should return a array that contains letters that result in false of making up a word', function () {
+            board.fragment = 'ancestor';
+            const actual = board.losingPlay();
+            board.fragment = "";
+
+            expect(actual).to.be.an('array');
+        });
+
+    });
+
+
 
 });

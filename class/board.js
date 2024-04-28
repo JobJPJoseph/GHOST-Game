@@ -49,7 +49,7 @@ class Board {
         console.log(dash);
     }
 
-    losingPlay() {
+    isGhost() {
         const ghost = 'GHOST';
         this.record = ghost.slice(0, this.record.length + 1);
 
@@ -60,6 +60,43 @@ class Board {
         }
     }
 
+    winningPlay() {
+        const winningLetters = [];
+        const alpha = [
+            'a','b','c','d','e',
+            'f','g','h','i','j',
+            'k','l','m','n','o',
+            'p','q','r','s','t',
+            'u','v','w','x','y','z'
+        ];
+
+        for (let i = 0; i < alpha.length; i++) {
+            const letter = alpha[i];
+
+            if (this.isWord(letter)) winningLetters.push(letter);
+        }
+
+        return winningLetters;
+    }
+
+    losingPlay() {
+        const winningLetters = [];
+        const alpha = [
+            'a','b','c','d','e',
+            'f','g','h','i','j',
+            'k','l','m','n','o',
+            'p','q','r','s','t',
+            'u','v','w','x','y','z'
+        ];
+
+        for (let i = 0; i < alpha.length; i++) {
+            const letter = alpha[i];
+
+            if (!this.isWord(letter)) winningLetters.push(letter);
+        }
+
+        return winningLetters;
+    }
 
 }
 
