@@ -4,7 +4,7 @@ class Board {
 
     constructor(player1, player2) {
         this.players = [player1, player2];
-        this.fragment = "";
+        // this.fragment = "";
         this.dictionary;
 
         if(!Dictionary.isInitialized) {
@@ -12,6 +12,8 @@ class Board {
             this.dictionary = Dictionary.dictionary;
         }
     }
+
+    static fragment = "";
 
     isWord(letter) {
 

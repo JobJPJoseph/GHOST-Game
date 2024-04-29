@@ -251,6 +251,15 @@ describe('Board Class', function () {
 
     });
 
+    // We are going to make a significant change
+        // The computerPlayer class has access to the Board class methods
+        // We noticed that in Board class 'Board.takeTurn' and 'Board.possibleLetters' are dead code
+        // From here we will refactor to save us from future confusion.
+
+    // We will refactor ComputerPlayer.prototype.getInput
+        // We will call Math.floor(Math.random() * 2) which will give us 0 or 1
+            // This is based off Truth Tables
+        // This will decide whether we pick a winning letter or a losing letter.
 
 
 });
