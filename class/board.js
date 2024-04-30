@@ -33,11 +33,11 @@ class Board {
     }
 
     currentPlayer() {
-        return this.players[0];
+        return Board.players[0];
     }
 
     rotateTurn() {
-        [this.players[0], this.players[1]] = [this.players[1], this.players[0]];
+        [Board.players[0], Board.players[1]] = [Board.players[1], Board.players[0]];
     }
 
     reset() {
