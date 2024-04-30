@@ -2,25 +2,27 @@ const { Dictionary } = require("../class/dictionary");
 
 class Board {
 
-    constructor(player1, player2) {
-        this.players = [player1, player2];
-        this.fragment = "";
-        this.dictionary;
-
+    constructor() {
         if(!Dictionary.isInitialized) {
             Dictionary.initialize();
-            this.dictionary = Dictionary.dictionary;
+            Board.dictionary = Dictionary.dictionary;
         }
     }
+
+    static players = [];
+    static fragment = "";
+    static dictionary;
+
+
 
     isWord(letter) {
 
         if (!letter) return false;
 
-        const piece = this.fragment + letter;
+        const piece = Board.fragment + letter;
 
-        for(let i = 0; i < this.dictionary[piece[0]].length; i++) {
-            const word = this.dictionary[piece[0]][i];
+        for(let i = 0; i < Board.dictionary[piece[0]].length; i++) {
+            const word = Board.dictionary[piece[0]][i];
 
             if (piece === word) return word;
 
@@ -39,13 +41,13 @@ class Board {
     }
 
     reset() {
-        this.fragment = "";
+        Board.fragment = "";
     }
 
     printFragment() {
         const dash = "-".repeat(42);
         console.log(dash);
-        console.log(this.fragment);
+        console.log(Board.fragment);
         console.log(dash);
     }
 

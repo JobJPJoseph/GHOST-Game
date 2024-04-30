@@ -8,17 +8,17 @@ function ComputerPlayer () {
 ComputerPlayer.prototype = Object.create(Board.prototype);
 
 ComputerPlayer.prototype.getInput = function () {
-    const alpha = [
-        'a','b','c','d','e',
-        'f','g','h','i','j',
-        'k','l','m','n','o',
-        'p','q','r','s','t',
-        'u','v','w','x','y','z'
-    ];
+    const cheatEngine = Math.floor(Math.random() * 2);
 
-    const index = Math.floor(Math.random() * alpha.length);
-
-    return alpha[index];
+    if (cheatEngine) {
+        const winningLetters = this.winningPlay();
+        const index = Math.floor(Math.random() * winningLetters.length);
+        return winningLetters[index];
+    } else {
+        const losingLetters = this.losingPlay();
+        const index = Math.floor(Math.random() * losingLetters.length);
+        return losingLetters[index];
+    }
 }
 
 module.exports = {

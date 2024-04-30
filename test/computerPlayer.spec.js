@@ -22,9 +22,11 @@ describe('ComputerPlayer Class', function () {
 
     });
 
+    let board;
     let computerPlayer;
 
     before(function () {
+        board = new Board();
         computerPlayer = new ComputerPlayer();
     });
 
@@ -39,20 +41,49 @@ describe('ComputerPlayer Class', function () {
 
     describe('ComputerPlayer.getInput', function () {
 
-        it('should return a letter from a-z', function () {
-            const alpha = [
-                'a','b','c','d','e',
-                'f','g','h','i','j',
-                'k','l','m','n','o',
-                'p','q','r','s','t',
-                'u','v','w','x','y','z'
-            ];
+        it('should call Math.random', function () {
+            const randomSpy = chai.spy.on(Math, 'random');
 
+            computerPlayer.getInput();
+
+            expect(randomSpy).to.have.been.called;
+            chai.spy.restore(Math, 'random');
+        });
+
+        // it('should call Board.winningLetter or Board.losingLetter', function () {
+        //     const boardStub = chai.spy.interface({
+        //         winningLetter: 'a',
+        //         losingLetter: 'b'
+        //     });
+
+        //     Object.setPrototypeOf(ComputerPlayer.prototype, boardStub);
+
+        //     computerPlayer.getInput();
+
+        //     expect(boardStub.winningLetter).to.have.been.called.once;
+        //     expect(boardStub.losingLetter).to.have.been.called.once;
+
+        //     Object.setPrototypeOf(ComputerPlayer.prototype, Board.prototype);
+        // });
+
+        it('should return a letter from the alphabet (a-z)', function () {
+            const alpha = [
+                        'a','b','c','d','e',
+                        'f','g','h','i','j',
+                        'k','l','m','n','o',
+                        'p','q','r','s','t',
+                        'u','v','w','x','y','z'
+                    ];
+
+            Board.fragment = 'ancesto';
             const actual = computerPlayer.getInput();
+            Board.fragment = '';
+
 
             expect(alpha.includes(actual)).to.be.true;
         });
 
     });
+
 
 });
