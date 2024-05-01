@@ -15,9 +15,7 @@ ComputerPlayer.prototype.getInput = function () {
         const index = Math.floor(Math.random() * winningLetters.length);
         return winningLetters[index];
     } else {
-        const losingLetters = this.losingPlay();
-        const index = Math.floor(Math.random() * losingLetters.length);
-        return losingLetters[index];
+        return false;
     }
 }
 

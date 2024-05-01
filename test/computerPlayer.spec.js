@@ -50,38 +50,48 @@ describe('ComputerPlayer Class', function () {
             chai.spy.restore(Math, 'random');
         });
 
-        // it('should call Board.winningLetter or Board.losingLetter', function () {
-        //     const boardStub = chai.spy.interface({
-        //         winningLetter: 'a',
-        //         losingLetter: 'b'
-        //     });
+        context('When we successfully choose a letter', function () {
 
-        //     Object.setPrototypeOf(ComputerPlayer.prototype, boardStub);
+            it('should return a letter from the alphabet (a-z)', function () {
+                const alpha = [
+                            'a','b','c','d','e',
+                            'f','g','h','i','j',
+                            'k','l','m','n','o',
+                            'p','q','r','s','t',
+                            'u','v','w','x','y','z'
+                        ];
 
-        //     computerPlayer.getInput();
-
-        //     expect(boardStub.winningLetter).to.have.been.called.once;
-        //     expect(boardStub.losingLetter).to.have.been.called.once;
-
-        //     Object.setPrototypeOf(ComputerPlayer.prototype, Board.prototype);
-        // });
-
-        it('should return a letter from the alphabet (a-z)', function () {
-            const alpha = [
-                        'a','b','c','d','e',
-                        'f','g','h','i','j',
-                        'k','l','m','n','o',
-                        'p','q','r','s','t',
-                        'u','v','w','x','y','z'
-                    ];
-
-            Board.fragment = 'ancesto';
-            const actual = computerPlayer.getInput();
-            Board.fragment = '';
+                Board.fragment = 'ancesto';
+                const actual = computerPlayer.getInput();
+                Board.fragment = '';
 
 
-            expect(alpha.includes(actual)).to.be.true;
+                expect(alpha.includes(actual)).to.be.true;
+            });
+
         });
+
+        context('When we unseccefully choose a letter', function () {
+
+            it('should return false', function () {
+                const alpha = [
+                            'a','b','c','d','e',
+                            'f','g','h','i','j',
+                            'k','l','m','n','o',
+                            'p','q','r','s','t',
+                            'u','v','w','x','y','z'
+                        ];
+
+                Board.fragment = 'ancesto';
+                const actual = computerPlayer.getInput();
+                Board.fragment = '';
+
+
+                expect(alpha.includes(actual)).to.be.false;
+            });
+
+        });
+
 
     });
 

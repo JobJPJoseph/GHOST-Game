@@ -235,12 +235,57 @@ describe('Board Class', function () {
             expect(actual).to.be.an('array');
         });
 
-        it('should return a array that contains letters that result in false of making up a word', function () {
-            Board.fragment = 'ancestor';
-            const actual = board.losingPlay();
-            Board.fragment = "";
+        // it('should return a array that contains letters that result in false of making up a word', function () {
+        //     Board.fragment = 'ancestor';
+        //     const actual = board.losingPlay();
+        //     Board.fragment = "";
 
-            expect(actual).to.be.an('array');
+        //     expect(actual).to.be.an('array');
+        // });
+
+    });
+
+    // describe('displayStandings', function () {
+
+    //     it('should display the standing in a particular way', function () {
+    //         player.record = "GHO";
+    //         computerPlayer.record = "GHOS";
+
+    //         board.displayStandings();
+    //     });
+
+    // });
+
+    describe('Board.playRound', function () {
+
+        // Should make sure you call the nessesary methods
+
+        // My Thoughts:
+            /*
+            The first thing we need to do is call Board.displayStandings()
+            Next, remember we refactored .getInput, we will test if player is an instanceOf
+            said class.
+            if player is instanceOf Player:
+                We will call Board.isWord
+                Based on the result, will call Board.isGhost
+            if player is instanceOf ComputerPlayer
+                We will call
+
+            There is something off Logically about Board.losingPlay and implement Board.isGhost
+                We need to change the implementation of Board.losingLetters
+                Why? If computerPlayer chooses a letter from from losingLetter it actually means that none of those letters
+                based on Board.fragment continue to create a word. Thus why go through all the arithmetic just return false and
+                call Board.isGhost.
+
+            Now that we refactored
+            */
+
+        it('should call displayStandings', async function () {
+
+        });
+
+        it('should call ', async function () {
+
         });
 
     });

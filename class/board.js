@@ -81,25 +81,43 @@ class Board {
         return winningLetters;
     }
 
-    losingPlay() {
-        const winningLetters = [];
-        const alpha = [
-            'a','b','c','d','e',
-            'f','g','h','i','j',
-            'k','l','m','n','o',
-            'p','q','r','s','t',
-            'u','v','w','x','y','z'
-        ];
+    // losingPlay() {
+    //     const winningLetters = [];
+    //     const alpha = [
+    //         'a','b','c','d','e',
+    //         'f','g','h','i','j',
+    //         'k','l','m','n','o',
+    //         'p','q','r','s','t',
+    //         'u','v','w','x','y','z'
+    //     ];
 
-        for (let i = 0; i < alpha.length; i++) {
-            const letter = alpha[i];
+    //     for (let i = 0; i < alpha.length; i++) {
+    //         const letter = alpha[i];
 
-            if (!this.isWord(letter)) winningLetters.push(letter);
+    //         if (!this.isWord(letter)) winningLetters.push(letter);
+    //     }
+
+    //     return winningLetters;
+    // }
+
+    displayStandings() {
+        const str = "-".repeat(42);
+        const scoreBoard = ' '.repeat(16) + 'SCOREBOARD';
+        const nameRecord = ["NAME".padEnd(8), "RECORD"].join(" | ");
+
+        console.log(str);
+        console.log(scoreBoard);
+        console.log(str);
+        console.log(nameRecord);
+
+        for(let i = 0; i < Board.players.length; i++) {
+            const player = Board.players[i];
+
+            console.log([player.name.padEnd(8), player.record].join(" | "));
         }
 
-        return winningLetters;
+        console.log(str);
     }
-
 }
 
 module.exports = {
