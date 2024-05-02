@@ -118,6 +118,21 @@ class Board {
 
         console.log(str);
     }
+
+    async playRound() {
+        this.displayStandings();
+
+        let input = await this.currentPlayer().getInput();
+
+        if (input) {
+            Board.fragment += input;
+        } else {
+            this.currentPlayer().isGhost()
+        }
+
+        this.rotateTurn();
+    }
+
 }
 
 module.exports = {

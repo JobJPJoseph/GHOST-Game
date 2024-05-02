@@ -23,9 +23,11 @@ describe('Player class', function () {
 
     });
 
+    let board;
     let player;
 
     before(function () {
+        board = new Player();
         player = new Player();
     });
 

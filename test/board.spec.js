@@ -267,7 +267,9 @@ describe('Board Class', function () {
             said class.
             if player is instanceOf Player:
                 We will call Board.isWord
-                Based on the result, will call Board.isGhost
+                Based on the result:
+                    if true, add the letter to Board.fragment
+                    if false, will call Board.isGhost
             if player is instanceOf ComputerPlayer
                 We will call
 
@@ -277,16 +279,27 @@ describe('Board Class', function () {
                 based on Board.fragment continue to create a word. Thus why go through all the arithmetic just return false and
                 call Board.isGhost.
 
-            Now that we refactored
+            Now that we refactored computerPlayer.getInput, this will allow us improve our logic
+            for Board.playRound()
+
+            if player is instanceOf ComputerPlayer
+                We will call Board.currentPlayer() and save the result
+                Based on the result:
+                    if true, we will combine the letter with Board.fragment
+                    if false, call Board.isGhost
             */
 
-        it('should call displayStandings', async function () {
+        // it('should call displayStandings', async function () {
+        //     const displaySpy = chai.spy.on(Board, 'displayStandings');
 
-        });
+        //     await board.playRound();
 
-        it('should call ', async function () {
+        //     expect(displaySpy).to.have.been.called;
+        // });
 
-        });
+        // it('should call ', async function () {
+
+        // });
 
     });
 

@@ -45,6 +45,7 @@ Player.prototype.isSingleLetter = function (letter) {
 
     if (typeof letter !== 'string') return false;
     if (letter.length !== 1) return false;
+    if (!this.isWord(letter)) return false;
 
     const alpha = [
         'a','b','c','d','e',
