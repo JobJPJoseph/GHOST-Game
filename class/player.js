@@ -45,7 +45,10 @@ Player.prototype.isSingleLetter = function (letter) {
 
     if (typeof letter !== 'string') return false;
     if (letter.length !== 1) return false;
-    if (!this.isWord(letter)) return false;
+    // if (this.isWord(letter)) {
+
+    //     return false;
+    // }
 
     const alpha = [
         'a','b','c','d','e',
@@ -56,6 +59,17 @@ Player.prototype.isSingleLetter = function (letter) {
     ];
 
     return (!alpha.includes(letter.toLowerCase())) ? false : letter;
+}
+
+Player.prototype.isValid = async function () {
+    const input = await this.getInput();
+
+    if (this.isWord(input)) {
+        return input;
+    } else {
+        return false;
+    }
+
 }
 
 module.exports = {

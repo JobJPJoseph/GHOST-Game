@@ -86,4 +86,14 @@ describe('Player class', function () {
 
     });
 
+    describe('Player.isValid', function () {
+
+        it(`should return false when player's input nolonger creates a word`, async function () {
+            Board.fragment = 'anscesto';
+            expect(await player.isValid('p')).to.be.false;
+            Board.fragment = "";
+        });
+
+    });
+
 });
