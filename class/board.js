@@ -124,10 +124,13 @@ class Board {
 
         let input = await this.currentPlayer().getInput();
 
+        // We now need to account for the full word.
+        if ((typeof input === 'string') && (input.length > 1)) return input;
+
         if (input) {
             Board.fragment += input;
         } else {
-            this.currentPlayer().isGhost()
+            this.currentPlayer().isGhost();
         }
 
         this.rotateTurn();

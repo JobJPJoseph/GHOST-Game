@@ -247,7 +247,7 @@ describe('Board Class', function () {
 
     // describe('displayStandings', function () {
 
-    //     it('should display the standing in a particular way', function () {
+    //     it('should call Board.displayStandings', function () {
     //         player.record = "GHO";
     //         computerPlayer.record = "GHOS";
 
@@ -258,48 +258,51 @@ describe('Board Class', function () {
 
     describe('Board.playRound', function () {
 
-        // Should make sure you call the nessesary methods
+        it('should Board.displayStandings', async function () {
+            const standingsSpy = chai.spy.on(Board.prototype, 'displayStandings');
 
-        // My Thoughts:
-            /*
-            The first thing we need to do is call Board.displayStandings()
-            Next, remember we refactored .getInput, we will test if player is an instanceOf
-            said class.
-            if player is instanceOf Player:
-                We will call Board.isWord
-                Based on the result:
-                    if true, add the letter to Board.fragment
-                    if false, will call Board.isGhost
-            if player is instanceOf ComputerPlayer
-                We will call
+            await board.playRound();
 
-            There is something off Logically about Board.losingPlay and implement Board.isGhost
-                We need to change the implementation of Board.losingLetters
-                Why? If computerPlayer chooses a letter from from losingLetter it actually means that none of those letters
-                based on Board.fragment continue to create a word. Thus why go through all the arithmetic just return false and
-                call Board.isGhost.
+            return expect(standingsSpy).to.have.been.called;
+        });
 
-            Now that we refactored computerPlayer.getInput, this will allow us improve our logic
-            for Board.playRound()
+        it('should call Board.rotateTurn', async function () {
+            const rotateSpy = chai.spy.on(Board.prototype, 'rotateTurn');
 
-            if player is instanceOf ComputerPlayer
-                We will call Board.currentPlayer() and save the result
-                Based on the result:
-                    if true, we will combine the letter with Board.fragment
-                    if false, call Board.isGhost
-            */
+            await board.playRound();
 
-        // it('should call displayStandings', async function () {
-        //     const displaySpy = chai.spy.on(Board, 'displayStandings');
+            return expect(rotateSpy).to.have.been.called;
+        });
 
-        //     await board.playRound();
+        context('When it creates a piece of a word', async function () {
 
-        //     expect(displaySpy).to.have.been.called;
-        // });
+            it('should add input to Board.fragment', async function () {
+                Board.fragment = "";
+                await board.playRound();
+                return expect(Board.fragment.length).to.equal(1);
+            });
 
-        // it('should call ', async function () {
+        });
 
-        // });
+        context('When it nolonger creates any words', async function () {
+
+            it('should return false when there is no potential word', async function () {
+                Board.fragment = "ancestorp";
+                const input = await board.playRound();
+                return expect(input).to.be.false;
+            });
+
+        });
+
+        context('When it creates an actual word', function () {
+
+            it('should return the exact string that it creates', async function () {
+                Board.fragment = "ancesto";
+                const input = await board.playRound();
+                return expect(input).to.equal('ancestor');
+            });
+
+        });
 
     });
 

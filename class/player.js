@@ -8,7 +8,7 @@ function Player () {
 
 Player.prototype = Object.create(Board.prototype);
 
-Player.prototype.getInput = async function () {
+Player.prototype.isValid = async function () {
     // This will be Asynchronous
 
     const rl = readline.createInterface({
@@ -28,7 +28,7 @@ Player.prototype.getInput = async function () {
                     rl.close();
                     resolve(validInput);
                 } else {
-                    this.getInput();
+                    this.isValid();
                 }
 
             });
@@ -45,10 +45,6 @@ Player.prototype.isSingleLetter = function (letter) {
 
     if (typeof letter !== 'string') return false;
     if (letter.length !== 1) return false;
-    // if (this.isWord(letter)) {
-
-    //     return false;
-    // }
 
     const alpha = [
         'a','b','c','d','e',
@@ -61,8 +57,8 @@ Player.prototype.isSingleLetter = function (letter) {
     return (!alpha.includes(letter.toLowerCase())) ? false : letter;
 }
 
-Player.prototype.isValid = async function () {
-    const input = await this.getInput();
+Player.prototype.getInput = async function () {
+    const input = await this.isValid();
 
     if (this.isWord(input)) {
         return input;
