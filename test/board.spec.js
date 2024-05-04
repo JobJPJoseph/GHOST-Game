@@ -258,6 +258,9 @@ describe('Board Class', function () {
 
     describe('Board.playRound', function () {
 
+        // Today we need to fix all the failed tests
+
+
         it('should Board.displayStandings', async function () {
             const standingsSpy = chai.spy.on(Board.prototype, 'displayStandings');
 
@@ -286,10 +289,11 @@ describe('Board Class', function () {
 
         context('When it nolonger creates any words', async function () {
 
-            it('should return false when there is no potential word', async function () {
-                Board.fragment = "ancestorp";
+            it(`should add to the current player's record`, async function () {
+                computerPlayer.record = "";
+                Board.fragment = "ancesto";
                 const input = await board.playRound();
-                return expect(input).to.be.false;
+                return expect(Board.players[1].record).to.equal('G');
             });
 
         });

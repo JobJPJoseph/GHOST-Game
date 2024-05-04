@@ -60,7 +60,12 @@ Player.prototype.isSingleLetter = function (letter) {
 Player.prototype.getInput = async function () {
     const input = await this.isValid();
 
-    if (this.isWord(input)) {
+    // This is the issue
+    const result = this.isWord(input);
+
+    if (typeof result === 'string') return result;
+
+    if (result) {
         return input;
     } else {
         return false;

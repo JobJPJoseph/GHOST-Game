@@ -120,18 +120,24 @@ class Board {
     }
 
     async playRound() {
-        this.displayStandings();
+        // this.displayStandings();
 
         let input = await this.currentPlayer().getInput();
 
+        console.log(input);
+        console.log(this.currentPlayer());
         // We now need to account for the full word.
         if ((typeof input === 'string') && (input.length > 1)) return input;
 
         if (input) {
             Board.fragment += input;
+            // if ((typeof input === 'string') && (input.length > 1)) return input;
         } else {
             this.currentPlayer().isGhost();
         }
+
+        this.displayStandings();
+
 
         this.rotateTurn();
     }
