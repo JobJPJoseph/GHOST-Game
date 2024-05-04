@@ -54,12 +54,6 @@ class Board {
     isGhost() {
         const ghost = 'GHOST';
         this.record = ghost.slice(0, this.record.length + 1);
-
-        if (this.record === ghost) {
-            return true;
-        } else {
-            return false;
-        }
     }
 
     winningPlay() {
@@ -81,25 +75,6 @@ class Board {
         return winningLetters;
     }
 
-    // losingPlay() {
-    //     const winningLetters = [];
-    //     const alpha = [
-    //         'a','b','c','d','e',
-    //         'f','g','h','i','j',
-    //         'k','l','m','n','o',
-    //         'p','q','r','s','t',
-    //         'u','v','w','x','y','z'
-    //     ];
-
-    //     for (let i = 0; i < alpha.length; i++) {
-    //         const letter = alpha[i];
-
-    //         if (!this.isWord(letter)) winningLetters.push(letter);
-    //     }
-
-    //     return winningLetters;
-    // }
-
     displayStandings() {
         const str = "-".repeat(42);
         const scoreBoard = ' '.repeat(16) + 'SCOREBOARD';
@@ -120,26 +95,30 @@ class Board {
     }
 
     async playRound() {
-        // this.displayStandings();
+        this.displayStandings();
 
         let input = await this.currentPlayer().getInput();
 
-        console.log(input);
-        console.log(this.currentPlayer());
-        // We now need to account for the full word.
         if ((typeof input === 'string') && (input.length > 1)) return input;
 
         if (input) {
             Board.fragment += input;
-            // if ((typeof input === 'string') && (input.length > 1)) return input;
+            this.printFragment();
         } else {
             this.currentPlayer().isGhost();
         }
 
-        this.displayStandings();
-
-
         this.rotateTurn();
+    }
+
+    isWin() {
+        if (Board.players[1].record === "GHOST") return true;
+        return false;
+    }
+
+    isLose() {
+        if (Board.players[0].record === "GHOST") return true;
+        return false;
     }
 
 }
