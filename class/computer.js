@@ -10,14 +10,25 @@ ComputerPlayer.prototype = Object.create(Board.prototype);
 ComputerPlayer.prototype.getInput = function () {
     const cheatEngine = Math.floor(Math.random() * 2);
 
+    // We need to account for the full word
+
+    console.log(cheatEngine);
+
     if (cheatEngine) {
         const winningLetters = this.winningPlay();
+
+        console.log(winningLetters);
+
+        for (let i = 0; i < winningLetters.length; i++) {
+            const char = winningLetters[i];
+
+            if (char.length > 1) return char;
+        }
+
         const index = Math.floor(Math.random() * winningLetters.length);
         return winningLetters[index];
     } else {
-        const losingLetters = this.losingPlay();
-        const index = Math.floor(Math.random() * losingLetters.length);
-        return losingLetters[index];
+        return false;
     }
 }
 

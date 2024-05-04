@@ -23,9 +23,11 @@ describe('Player class', function () {
 
     });
 
+    let board;
     let player;
 
     before(function () {
+        board = new Player();
         player = new Player();
     });
 
@@ -71,15 +73,25 @@ describe('Player class', function () {
 
     });
 
-    describe('Player.getInput', function () {
+    describe('Player.isValid', function () {
 
         context('Asynchronous', function () {
 
             it(`should return the player's input`, async function () {
-                const actual = await player.getInput();
+                const actual = await player.isValid();
                 return expect(actual).to.be.a('string');
             });
 
+        });
+
+    });
+
+    describe('Player.getInput', function () {
+
+        it(`should return false when player's input nolonger creates a word`, async function () {
+            Board.fragment = 'anscesto';
+            expect(await player.getInput('p')).to.be.false;
+            Board.fragment = "";
         });
 
     });

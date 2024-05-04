@@ -26,7 +26,7 @@ class Dictionary {
                 this.dictionary[word[0]] = [];
             }
 
-            this.dictionary[word[0]].push(word);
+            if (word.length >= 3) this.dictionary[word[0]].push(word);
         }
 
         this.isInitialized = true;

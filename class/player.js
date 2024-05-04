@@ -8,7 +8,7 @@ function Player () {
 
 Player.prototype = Object.create(Board.prototype);
 
-Player.prototype.getInput = async function () {
+Player.prototype.isValid = async function () {
     // This will be Asynchronous
 
     const rl = readline.createInterface({
@@ -28,7 +28,7 @@ Player.prototype.getInput = async function () {
                     rl.close();
                     resolve(validInput);
                 } else {
-                    this.getInput();
+                    this.isValid();
                 }
 
             });
@@ -55,6 +55,22 @@ Player.prototype.isSingleLetter = function (letter) {
     ];
 
     return (!alpha.includes(letter.toLowerCase())) ? false : letter;
+}
+
+Player.prototype.getInput = async function () {
+    const input = await this.isValid();
+
+    // This is the issue
+    const result = this.isWord(input);
+
+    if (typeof result === 'string') return result;
+
+    if (result) {
+        return input;
+    } else {
+        return false;
+    }
+
 }
 
 module.exports = {
