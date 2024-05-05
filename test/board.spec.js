@@ -207,6 +207,9 @@ describe('Board Class', function () {
 
     });
 
+    // Make sure to refactor the return word case.
+        // We don't actually want to return the word but reset the word.
+
     describe('Board.playRound', function () {
 
         it('should Board.displayStandings', async function () {
@@ -248,10 +251,21 @@ describe('Board Class', function () {
 
         context('When it creates an actual word', function () {
 
-            it('should return the exact string that it creates', async function () {
+            it('should call Board.reset', async function () {
+                const resetSpy = chai.spy.on(Board.prototype, 'reset');
+
                 Board.fragment = "ancesto";
-                const input = await board.playRound();
-                return expect(input).to.equal('ancestor');
+                await board.playRound();
+
+                expect(resetSpy).to.have.been.called;
+                chai.spy.restore(Board.prototype, 'reset');
+                return;
+            });
+
+            it('should reset Board.fragment to an empty string', async function () {
+                Board.fragment = "ancesto";
+                await board.playRound();
+                return expect(Board.fragment).to.equal('');
             });
 
         });

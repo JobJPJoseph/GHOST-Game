@@ -61,7 +61,7 @@ describe('ComputerPlayer Class', function () {
                             'u','v','w','x','y','z'
                         ];
 
-                Board.fragment = 'ancesto';
+                Board.fragment = 'ancest';
                 const actual = computerPlayer.getInput();
                 Board.fragment = '';
 
