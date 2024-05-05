@@ -7,15 +7,10 @@ const computerPlayer = new ComputerPlayer();
 const board = new Board();
 Board.players.push(player, computerPlayer);
 
-// We need way to keep the game going
-    /*
-    We could try to test for players record
-    We could try a Win/Lose situation
+async function playGame() {
+    while(!(board.isWin() || board.isLose())) {
+        await board.playRound();
+    }
+}
 
-    Win:
-        We can see this if computerPlayer.record === GHOST return true, else return false
-    Lose:
-        We can see this if player.record === GHOST return true, else return false
-
-    Of couse we want both to be false. If any of these are true than the game is over.
-    */
+playGame();

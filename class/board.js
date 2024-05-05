@@ -69,7 +69,10 @@ class Board {
         for (let i = 0; i < alpha.length; i++) {
             const letter = alpha[i];
 
-            if (this.isWord(letter)) winningLetters.push(letter);
+            let result = this.isWord(letter);
+
+            if (typeof result === 'string') winningLetters.push(result);
+            if (typeof result === 'boolean') winningLetters.push(letter);
         }
 
         return winningLetters;
@@ -96,28 +99,35 @@ class Board {
 
     async playRound() {
         this.displayStandings();
+        this.printFragment();
 
         let input = await this.currentPlayer().getInput();
 
-        if ((typeof input === 'string') && (input.length > 1)) return input;
-
         if (input) {
             Board.fragment += input;
-            this.printFragment();
+            if ((typeof input === 'string') && (input.length > 1)) this.reset();
         } else {
             this.currentPlayer().isGhost();
         }
 
         this.rotateTurn();
+        console.clear();
     }
 
     isWin() {
-        if (Board.players[1].record === "GHOST") return true;
+        if (Board.players[1].record === "GHOST") {
+            console.log(`You Win!!!`);
+            return true;
+        }
         return false;
     }
 
     isLose() {
-        if (Board.players[0].record === "GHOST") return true;
+        if (Board.players[0].record === "GHOST") {
+            console.log('You Lose!!!');
+            return true;
+        }
+
         return false;
     }
 
