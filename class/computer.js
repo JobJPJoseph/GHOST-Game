@@ -8,7 +8,7 @@ function ComputerPlayer () {
 ComputerPlayer.prototype = Object.create(Board.prototype);
 
 ComputerPlayer.prototype.getInput = function () {
-    const cheatEngine = Math.floor(Math.random() * 2);
+    const cheatEngine = Math.floor(Math.random() * 3);
 
     if (cheatEngine) {
         const winningLetters = this.winningPlay();

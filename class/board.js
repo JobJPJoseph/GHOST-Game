@@ -72,7 +72,7 @@ class Board {
             let result = this.isWord(letter);
 
             if (typeof result === 'string') winningLetters.push(result);
-            if (typeof result === 'boolean') winningLetters.push(letter);
+            if (typeof result === 'boolean' && result === true) winningLetters.push(letter);
         }
 
         return winningLetters;
@@ -115,20 +115,27 @@ class Board {
     }
 
     isWin() {
-        if (Board.players[1].record === "GHOST") {
+        if (Board.players[0].record === "GHOST") {
             console.log(`You Win!!!`);
             return true;
         }
+
         return false;
     }
 
     isLose() {
-        if (Board.players[0].record === "GHOST") {
+        if (Board.players[1].record === "GHOST") {
             console.log('You Lose!!!');
             return true;
         }
 
         return false;
+    }
+
+    gameActive() {
+        if (this.isWin()) return false;
+        if (this.isLose()) return false;
+        return true;
     }
 
 }
