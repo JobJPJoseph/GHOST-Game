@@ -13,7 +13,13 @@ class Board {
     static fragment = "";
     static dictionary;
 
+    getPlayer() {
+        return Board.players[0];
+    }
 
+    getComputerPlayer() {
+        return Board.players[1];
+    }
 
     isWord(letter) {
 
@@ -32,12 +38,12 @@ class Board {
         return false;
     }
 
-    currentPlayer() {
-        return Board.players[0];
-    }
-
     rotateTurn() {
         [Board.players[0], Board.players[1]] = [Board.players[1], Board.players[0]];
+    }
+
+    currentPlayer() {
+        return Board.players[0];
     }
 
     reset() {
@@ -101,7 +107,7 @@ class Board {
         this.displayStandings();
         this.printFragment();
 
-        let input = await this.currentPlayer().getInput();
+        const input = await this.currentPlayer().getInput();
 
         if (input) {
             Board.fragment += input;
@@ -115,27 +121,29 @@ class Board {
     }
 
     isWin() {
-        if (Board.players[0].record === "GHOST") {
-            console.log(`You Win!!!`);
-            return true;
+        for (let i = 0; i < Board.players.length; i++) {
+            const player = Board.players[i];
+
+            if (player.name === 'Computer' && player.record === "GHOST") {
+                console.log(`You Win!!!`);
+                return true;
+            }
         }
 
         return false;
     }
 
     isLose() {
-        if (Board.players[1].record === "GHOST") {
-            console.log('You Lose!!!');
-            return true;
+        for (let i = 0; i < Board.players.length; i++) {
+            const player = Board.players[i];
+
+            if (player.name === 'Player' && player.record === "GHOST") {
+                console.log(`You Lose!!!`);
+                return true;
+            }
         }
 
         return false;
-    }
-
-    gameActive() {
-        if (this.isWin()) return false;
-        if (this.isLose()) return false;
-        return true;
     }
 
 }

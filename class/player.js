@@ -28,7 +28,8 @@ Player.prototype.isValid = async function () {
                     rl.close();
                     resolve(validInput);
                 } else {
-                    this.isValid();
+                    rl.close();
+                    resolve(this.isValid());
                 }
 
             });

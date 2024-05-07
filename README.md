@@ -1,29 +1,19 @@
 # GHOST Project
 
 ## Things to implement:
-    Inheritance:
-    Binding (context):
-    Destructuring:
-    Asychronousity (Promises/asyce-await):
-    Error Handling:
-    NPM Packages (Mocha/Chai):
-    Class instances:
-    Single Responsibiity Principle:
-    Custom Errors:
-    Must use ES5 and ES6 Syntax:
-    Must try to implement new algorithms:
+    Inheritance: Done
+    Binding (context): none
+    Destructuring: Done
+    Asychronousity (Promises/asyce-await): Done
+    NPM Packages (Mocha/Chai): Done
+    Class instances: Done
+    Single Responsibiity Principle: Done
+    Custom Errors: none
+    Handling Errors: none
+    Must use ES5 and ES6 Syntax: Done
+    Must try to implement new algorithms: Done
 
 ### Tasks
-    1: We need to import a file that contains a document which represnts a dictionary. We will read the file, then store the words in a dictionary.
+    1. We need to implement a Custom Error in the Board class.
 
-    2: We need to create a class called Player. Since we are mixing ES5 and ES6, we need to make sure that the Player class is able to extend from the Board class.
-
-    3: We need to implement a way to validate a player's input and return true or false.
-
-    4: We need to get the player's input and return it.
-
-    5: We need to now focus on the Computer Player class. The class needs to be coded on ES5 syntax. This class will have two properties: name and record. Also Player class should also have this.
-
-    6: We need to assign the ComputerPlayer.prototype to the Board.prototype.
-
-    7: We now need to get the input of the Computer Player.
+    2. We need to cover an edge case or the game.js file just in case if the file is not found.
