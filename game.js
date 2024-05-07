@@ -8,7 +8,7 @@ const board = new Board();
 Board.players.push(player, computerPlayer);
 
 async function playGame() {
-    while(board.gameActive()) {
+    while(!(board.isWin() || board.isLose())) {
         await board.playRound();
     }
 }
