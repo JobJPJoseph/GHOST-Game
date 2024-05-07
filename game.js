@@ -13,4 +13,8 @@ async function playGame() {
     }
 }
 
-playGame();
+try {
+    playGame();
+} catch (error) {
+    console.log(error.stack);
+}
