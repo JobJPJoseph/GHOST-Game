@@ -3,10 +3,19 @@ const { Dictionary } = require("../class/dictionary");
 class Board {
 
     constructor() {
+
+        if (Error.captureStackTrace) {
+            Error.captureStackTrace(this, Board);
+        }
+
         if(!Dictionary.isInitialized) {
             Dictionary.initialize();
             Board.dictionary = Dictionary.dictionary;
+        } else {
+            throw new Error('Requires a dictionary text file');
         }
+
+
     }
 
     static players = [];
