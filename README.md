@@ -2,9 +2,9 @@
 
 ## Things to implement:
     Inheritance: Done
-    Binding (context): Done
+    Binding (context): none
     Destructuring: Done
-    Asychronousity (Promises/asyce-await): Done // Needs to be refactored a bit
+    Asychronousity (Promises/asyce-await): Done
     NPM Packages (Mocha/Chai): Done
     Class instances: Done
     Single Responsibiity Principle: Done
@@ -14,6 +14,6 @@
     Must try to implement new algorithms: Done
 
 ### Tasks
-    1. We need to refactor the player.isValid method so that false case does not repeat inputs
+    1. We need to implement a Custom Error in the Board class.
 
-    2. To fix the issue we the 'isWin' and 'isLose' not working as intended. We will create two methods that will reference the player and computerPlayer separately. The 'isWin' and 'isLose' we reference these methods.
+    2. We need to cover an edge case or the game.js file just in case if the file is not found.
