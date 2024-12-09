@@ -31,23 +31,55 @@ class Board {
     }
 
     isWord(letter) {
-
         if (!letter) return false;
 
-        const piece = Board.fragment + letter;
+        let piece = Board.fragment + letter;
 
-        for(let i = 0; i < Board.dictionary[piece[0]].length; i++) {
-            const word = Board.dictionary[piece[0]][i];
+        if (Board.fragment === "") return piece;
 
-            if (piece === word) return word;
+        let words = Board.dictionary[piece[0]];
 
-            if (word.startsWith(piece)) {
-                console.log(word);
-                return true;
+        const binarySearch = function (arr, word, start=0, end=arr.length) {
+            if (start === end) return -1;
+
+            let mid = Math.floor((end + start) / 2);
+
+            if (arr[mid] === word) return arr[mid];
+
+            if (arr[mid].startsWith(word)) return word;
+
+            let hash = (arg1, arg2) => {
+                let wordSum = 0;
+                let pieceSum = 0;
+
+                for (let i = 0; i < arg2.length; i++) {
+
+                    wordSum += arg1.charCodeAt(i);
+                    pieceSum += arg2.charCodeAt(i);
+                }
+
+                return pieceSum > wordSum;
             }
+
+
+            let bool = hash(arr[mid], word);
+            let result;
+
+            if (bool) {
+                // When bigger
+                let newStart = mid + 1;
+                result = binarySearch(words, word, newStart, end);
+            } else {
+                let newEnd = mid - 1;
+                result = binarySearch(words, word, start, newEnd);
+            }
+
+            return result;
         }
 
-        return false;
+        let result = binarySearch(words, piece);
+
+        return (result === -1) ? false : result;
     }
 
     rotateTurn() {
@@ -127,7 +159,7 @@ class Board {
 
         const input = await this.currentPlayer().getInput();
         console.log('The player chose: ', input);
-        await pause(7000);
+        await pause(4000);
 
         if (input) {
             Board.fragment += input;
@@ -137,7 +169,7 @@ class Board {
         }
 
         console.clear();
-        await pause(5000);
+        await pause(3000);
         this.rotateTurn();
     }
 
