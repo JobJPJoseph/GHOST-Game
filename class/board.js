@@ -41,7 +41,10 @@ class Board {
 
             if (piece === word) return word;
 
-            if (word.startsWith(piece)) return true;
+            if (word.startsWith(piece)) {
+                console.log(word);
+                return true;
+            }
         }
 
         return false;
@@ -113,10 +116,18 @@ class Board {
     }
 
     async playRound() {
+        let pause = ms => new Promise((resolve) => {
+
+            console.log('Switching turns')
+            setTimeout(resolve, ms);
+        });
+
         this.displayStandings();
         this.printFragment();
 
         const input = await this.currentPlayer().getInput();
+        console.log('The player chose: ', input);
+        await pause(7000);
 
         if (input) {
             Board.fragment += input;
@@ -125,8 +136,9 @@ class Board {
             this.currentPlayer().isGhost();
         }
 
-        this.rotateTurn();
         console.clear();
+        await pause(5000);
+        this.rotateTurn();
     }
 
     isWin() {
